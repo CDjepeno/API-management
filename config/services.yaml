@@ -31,3 +31,17 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Serializer\PatchedDateTimeNormalizer:
         tags: [serializer.normalizer]
+
+    App\Event\JWTCreatedSubscriber:
+        tags:
+            - {
+                name: kernel.event_listener, 
+                event: lexik_jwt_authentication.on_jwt_created,
+                method: updateJwtData
+              }
+    
+    App\Doctrine\CurrentUserExtention:
+        tags:
+            -  name: api_platform.doctrine.orm.query_extension.collection 
+            -  name: api_platform.doctrine.orm.query_extension.item 
+

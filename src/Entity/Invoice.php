@@ -56,7 +56,7 @@ class Invoice
      * @ORM\Column(type="datetime")
      * @Groups({"invoices_read","customers_read", "invoices_subresource"})
      * @Assert\NotBlank(message="Le status de la facture est obligatoire")
-     * @Assert\Type("\DateTimeInterface", message="La date doit être au format YYYY-MM-DD")
+     * @Assert\Type("\DateTime", message="La date doit être au format YYYY-MM-DD")
      */
     private $sentAt;
 
