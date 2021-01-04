@@ -1,34 +1,48 @@
 // import de react
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import ReactDOM from "react-dom";
 import Navbar from './components/Navbar';
-import { HashRouter, Switch, Route } from "react-router-dom";
-
-
-// import du scss
-import '../styles/app.scss';
+import { HashRouter, Switch, Route, withRouter, Redirect } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import CustomerPage from './pages/CustomerPage';
 import InvoicePage from './pages/InvoicesPage';
+import LoginPage from './pages/LoginPage';
+import authAPI from './services/authAPI';
+import authContext from './context/authContext';
+import PrivateRoute from './components/PrivateRoute';
+
+// import du scss
+import '../styles/app.scss';
 // import CustomerPageWithPagination from './pages/CustomerPageWithPagination';
 
-// start the Stimulus application
-// import './bootstrap';
 
-console.log("je marche")
+authAPI.setup();
 
 const App = () => {
-    return <HashRouter>
-        <Navbar />
+    const [isAuthenticated, setIsAuthenticated] = useState(authAPI.isAuthenticated());
+    const NavbarWithRouter = withRouter(Navbar);
 
-        <main className="container pt-5">
-            <Switch>
-                <Route path="/invoices" component={InvoicePage} />
-                <Route path="/customers" component={CustomerPage} />
-                <Route path="/" component={HomePage} />
-            </Switch>
-        </main>
-    </HashRouter>;
+    const contextValue = {
+        isAuthenticated,
+        setIsAuthenticated
+    }
+
+    return(
+        <authContext.Provider value={contextValue}> 
+            <HashRouter>
+                <NavbarWithRouter />
+
+                <main className="container pt-5">
+                    <Switch>
+                        <Route path="/login" component={LoginPage}/>
+                        <PrivateRoute path="/invoices" isAuthenticated={isAuthenticated} component={InvoicePage}/>
+                        <PrivateRoute path="/customers" isAuthenticated={isAuthenticated} component={CustomerPage}/>   
+                        <Route path="/" component={HomePage} />
+                    </Switch>
+                </main>
+            </HashRouter>;
+        </authContext.Provider>
+    );
 };
 
 ReactDOM.render(<App />, document.getElementById("app"));
