@@ -2,7 +2,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-// 
 /**
  * Déconnexion (suppression du token du localStorage et sur Axios)
  */
@@ -37,7 +36,7 @@ function setAxiosToken(token) {
 }
 
 /**
- * Mise en place lors du chargement de l'application
+ * Mise en place lors du chargement de l'application si le token est valide
  */
 function setup() {
     const token = window.localStorage.getItem("authToken");
