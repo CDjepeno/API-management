@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 import ReactDOM from "react-dom";
 import Navbar from './components/Navbar';
-import { HashRouter, Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, withRouter } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import CustomerPage from './pages/CustomerPage';
 import InvoicePage from './pages/InvoicesPage';
