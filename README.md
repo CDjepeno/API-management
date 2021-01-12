@@ -19,3 +19,4 @@
 - Système de routage.
 - Authentification JWT
 - Gestion de formulaire
+- Utilisation de la librairie axios
