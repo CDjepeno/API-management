@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import InvoicesAPI from '../services/invoicesAPI';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const STATUS_CLASSES = {
     PAID: "success",
@@ -26,6 +27,7 @@ const InvoicePage = (props) => {
     const fetchInvoices = async () => {
         try {
             const data = await InvoicesAPI.findAll()
+            console.log(data);
             setInvoices(data);
         } catch (error) {
             console.log(error.message)
@@ -73,7 +75,10 @@ const InvoicePage = (props) => {
 
     return ( 
         <>
-        <h1>Liste des factures</h1>
+        <div className="d-flex justify-content-between align-items-center">
+            <h1>Liste des factures</h1>
+            <Link className="btn btn-primary" to="/invoices/new">Crée une facture</Link>
+        </div>
 
         <div className="form-group">
             <input type="text" onChange={handleSearch} className="form-control" value={search} placeholder="Rechercher..."/>
@@ -105,7 +110,7 @@ const InvoicePage = (props) => {
                         </td>
                         <td className="text-center">{invoice.amount.toLocaleString()} €</td>
                         <td>
-                            <button className="btn btn-sm btn-warning mr-1">Editer</button>
+                            <Link to={"/invoices/" + invoice.id} className="btn btn-sm btn-warning mr-1">Editer</Link>
                             <button className="btn btn-sm btn-danger" onClick={() => handleDelete(invoice.id)}>Supprimer</button>
                         </td>
                     </tr>

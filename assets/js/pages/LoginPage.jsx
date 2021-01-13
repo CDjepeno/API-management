@@ -3,16 +3,16 @@ import Field from '../components/forms/Field';
 import authContext from '../context/authContext';
 import authAPI from '../services/authAPI';
 
-    const LoginPage = ({ history}) => {
+    const LoginPage = ({ history }) => {
 
-        const { setIsAuthenticated } = useContext(authContext)
-
+        const [error, setError]              = useState("");
         const [credentials, setCredenttials] = useState({
             username: "",
             password:""
         })
+        
+        const { setIsAuthenticated } = useContext(authContext)
     
-    const [error, setError] = useState("");
     
     // Gestion des champs du formulaire
     const handleChange = ({currentTarget}) => {
@@ -26,11 +26,10 @@ import authAPI from '../services/authAPI';
     // Gestion du submit
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         try {
             await authAPI.authenticate(credentials);
-            setError("");
             setIsAuthenticated(true);
+            setError("");
             history.replace("/customers");
         } catch (error) {
             setError("Aucun compte ne possède cette addresse ou alors les informations ne correspondent pas")
@@ -49,7 +48,7 @@ import authAPI from '../services/authAPI';
                    error={error}
             />
             <Field label="Mot de passe" 
-                   name="username" 
+                   name="password" 
                    value={credentials.password} 
                    onChange={handleChange}
                    error=""

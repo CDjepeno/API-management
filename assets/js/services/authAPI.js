@@ -16,12 +16,11 @@ function logout() {
  */
 function authenticate(credentials) {
     return axios
-    .post("https://127.0.0.1:8000/api/login_check", credentials)
-    .then(response => response.data.token)
-    .then(token => {
+        .post("https://127.0.0.1:8000/api/login_check", credentials)
+        .then(response => response.data.token)
+        .then(token => {
         // Ont stock le token dans le local storage
         window.localStorage.setItem("authToken", token);
-    
         // Ont préviens axios qu'ont a un header pour toute nos futur requêtes HTTP
         setAxiosToken(token);
     })
@@ -44,7 +43,7 @@ function setup() {
     if(token) {
         const jwtData = jwtDecode(token)
         if(jwtData.exp > new Date().getTime() / 1000) {
-            axios.defaults.headers["Authorization"] = "Bearer " + token;
+            setAxiosToken(token);
         } 
     }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 const Field = ({ name, label, value, onChange, placeholder, type = "text", error="" }) => {
     return (  
         <div className="form-group">
-            <label htmlFor={name}>{label}</label>f
+            <label htmlFor={name}>{label}</label>
             <input 
                 type={type}
                 onChange={onChange}
@@ -13,9 +13,7 @@ const Field = ({ name, label, value, onChange, placeholder, type = "text", error
                 id={name}
                 className={"form-control" + (error && " is-invalid")} 
             />
-            { error && 
-                <p className="invelid-feedback">{error}</p>
-            }
+            { error && <p className="invelid-feedback">{error}</p>  }
         </div>
     );
 }

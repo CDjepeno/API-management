@@ -17,8 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
  * @ApiResource(
- *      collectionOperations={"GET","POST"},
- *      itemOperations={"GET","PUT","DELETE"},
+ *      collectionOperations={
+ *              "GET",
+ *              "POST"
+ *      },
+ *      itemOperations={
+ *              "GET","PUT","DELETE"
+ *      },
  *      subresourceOperations={
  *          "invoices_get_subresource"={"path"="/customers/{id}/invoices"}
  *      },
@@ -42,16 +47,16 @@ class Customer
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"customers_read", "invoices_read"})
-     * @Assert\NotBlank(message="Le prénom du customer est obligatoire")
      * @Assert\Length(min=3, minMessage="Le prénom doit fair plus de 3 caractères", max=255, maxMessage="Le prénom ne doit pas faire plus de 255 caractères")
+     * @Assert\NotBlank(message="Le prénom du customer est obligatoire")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"customers_read", "invoices_read"})
-     * @Assert\NotBlank(message="Le nom du customer est obligatoire")
      * @Assert\Length(min=3, minMessage="Le nom doit fair plus de 3 caractères", max=255, maxMessage="Le nom ne doit pas faire plus de 255 caractères")
+     * @Assert\NotBlank(message="Le nom du customer est obligatoire")
      */
     private $lastName;
 

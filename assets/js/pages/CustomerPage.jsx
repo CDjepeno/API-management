@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 import CustomersAPI from "../Services/customersAPI";
 
@@ -12,6 +13,7 @@ const CustomerPage = (props) => {
     const fetchCustomers = async () => {
         try {
             const data = await CustomersAPI.findAll()
+            console.log(data);
             setCustomers(data);
         } catch(error) {
             console.log(error.message)
@@ -22,7 +24,6 @@ const CustomerPage = (props) => {
     useEffect(() => {
         fetchCustomers()
     }, []);
-    console.log(customers.length)
     
     // Gestion de la suppression d'un customer
     const handleDelete = async id => {
@@ -55,10 +56,12 @@ const CustomerPage = (props) => {
                                                 );
     // Pagination des données
     const paginatiedCustomers = Pagination.getData(filteredCustomers, currentPage, itemsPerPage)
-
     return(
         <>
-            <h1>Liste des clients</h1>
+            <div className="mb-4 d-flex justify-content-between align-items-center">
+                <h1>Liste des clients</h1>
+                <Link to="customers/new" className="btn btn-primary">Creér un client</Link>
+            </div>
 
             <div className="form-group">
                 <input type="text" onChange={handleSearch} className="form-control" value={search} placeholder="Rechercher..."/>

@@ -14,6 +14,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=InvoiceRepository::class)
  * @ApiResource(
+ *      collectionOperations={
+ *          "get",
+ *          "post"
+ *      },
+ *      itemOperations={
+ *          "delete",
+ *          "get"
+ *      },
  *      subresourceOperations={
  *          "api_customers_invoices_get_subresource"={
  *              "normalization_context"={"groups"={"invoices_subresource"}}
@@ -105,7 +113,7 @@ class Invoice
         return $this->amount;
     }
 
-    public function setAmount(float $amount): self
+    public function setAmount($amount): self
     {
         $this->amount = $amount;
 

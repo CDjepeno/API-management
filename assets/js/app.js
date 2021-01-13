@@ -13,6 +13,8 @@ import PrivateRoute from './components/PrivateRoute';
 
 // import du scss
 import '../styles/app.scss';
+import CustomerAdd from './pages/CustomerAdd';
+import InvoiceAdd from './pages/InvoiceAdd';
 // import CustomerPageWithPagination from './pages/CustomerPageWithPagination';
 
 
@@ -35,8 +37,10 @@ const App = () => {
                 <main className="container pt-5">
                     <Switch>
                         <Route path="/login" component={LoginPage}/>
-                        <PrivateRoute path="/invoices" isAuthenticated={isAuthenticated} component={InvoicePage}/>
-                        <PrivateRoute path="/customers" isAuthenticated={isAuthenticated} component={CustomerPage}/>   
+                        <PrivateRoute path="/invoices/:id" component={InvoiceAdd}/>
+                        <PrivateRoute path="/customers/:id" component={CustomerAdd}/>
+                        <PrivateRoute path="/invoices" component={InvoicePage}/>
+                        <PrivateRoute path="/customers" component={CustomerPage}/>   
                         <Route path="/" component={HomePage} />
                     </Switch>
                 </main>
