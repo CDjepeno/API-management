@@ -13,6 +13,7 @@ const InvoiceAdd = ({ history, match }) => {
     const [invoice, setInvoice] = useState({
         amount:"",
         customer:"",
+        // Ont donne par defaut le status a sent pour ne pas avoir quelque chose de vide quand le l'utilisateur ne selectionne rien.
         status:"SENT"
     });
     
@@ -21,9 +22,7 @@ const InvoiceAdd = ({ history, match }) => {
         customer:"",
         status:""
     })
-
     const [customers, setCustomers] = useState([]);
-
     const [editing, setEditing] = useState(false);
 
     const handleChange = ({ currentTarget }) => {
@@ -31,39 +30,39 @@ const InvoiceAdd = ({ history, match }) => {
         setInvoice({...invoice, [name]: value});
     }
 
-    // Récupération des customers 
+    // Récupération des client 
     const fetchCustomers = async () => {
         try {
             const customers  = await customersAPI.findAll();
             setCustomers(customers);
             
-            // if(id === "new"){
-                if(!invoice.customer) setInvoice({ ...invoice, customer: customers[0].id })
-            // }
+            // Dans le cas ou l'utilidateur n'a pas choisi de client ont lui donne le premier client qu'ont as charger 
+            if(!invoice.customer) setInvoice({ ...invoice, customer: customers[0].id })
                         
         } catch(error) {
             history.replace("/customers")
+            console.log(error.response)
         }
     }
 
      // Récupération de la facture en fonction de l'identifiant
      const fetchInvoice = async id => {
         try {
-            const data  = await invoicesAPI.findOne(id);
-
-            const { amount, status, customer } = data;
-            
-            setInvoice({amount, status, customer: customer.id});
-
+            const { amount, status, customer }  = await invoicesAPI.findOne(id);
+            setInvoice({ amount, status, customer: customer.id });   
         } catch (error) {
-           
             console.log(error.response)
             // notif flash
-            // history.replace("/customers")
+            history.replace("/invoices")
         }
     }
 
     // Au chargement du composant ont va chercher les customers
+    useEffect(() => {
+        fetchCustomers()
+    },[])
+
+    // Au chargement du composant si id est un nombre récupération de la bonne facture
     useEffect(() => {
         if(id !== "new"){
             setEditing(true)
@@ -71,38 +70,38 @@ const InvoiceAdd = ({ history, match }) => {
         } 
     }, [id]);
     
-    useEffect(() => {
-        // if(id === "new"){
-            fetchCustomers()
-        // }
-    },[])
 
     // Soumission du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if(editing)
+        console.log(invoice)
+
         try {     
-            // const response = await invoicesAPI.addInvoice(invoice,customer)
-            const respons = await axios.post("https://127.0.0.1:8000/api/invoices/",{...invoice, customer:`/api/customers/${invoice.customer}`})
-            console.log(respons)
-            history.replace("/invoices")
-            setErrors({})
-        } catch(error) {
-            console.log()
+            if(editing) {
+                await invoicesAPI.putInvoice(id, invoice)
+                // flash notification success
+                history.replace("/invoices")
+            } else {
+                await invoicesAPI.addInvoice(invoice,customer)
+                history.replace("/invoices")
+                // flash notification success
+                setErrors({})
+
+            }
+        } catch({ response }) {            
+            const violations = response.data['violations'];
+            
+            if(violations) {
+                const apiErrors = {};
+                violations.forEach(({propertyPath, message}) => {
+                    apiErrors[propertyPath] = message;
+                })
+                setErrors(apiErrors); 
+                //  flash notification erreurs
+            }
         }
-        // catch({ response }) {            
-            
-        //     const violations = response.data['violations'];
-            
-        //     if(violations) {
-        //         const apiErrors = {};
-        //         violations.forEach(({propertyPath, message}) => {
-        //             apiErrors[propertyPath] = message;
-        //         })
-        //         setErrors(apiErrors); 
-        // }
-    // }
-    //  flash notification erreurs
+        
+    
     }
 
     return ( 

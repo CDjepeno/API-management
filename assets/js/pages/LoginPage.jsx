@@ -6,7 +6,7 @@ import authAPI from '../services/authAPI';
     const LoginPage = ({ history }) => {
 
         const [error, setError]              = useState("");
-        const [credentials, setCredenttials] = useState({
+        const [credentials, setCredentials] = useState({
             username: "",
             password:""
         })
@@ -19,8 +19,7 @@ import authAPI from '../services/authAPI';
         // const {value, name} = currentTarget;
         const value = currentTarget.value;
         const name  = currentTarget.name;
-
-        setCredenttials({...credentials, [name]: value});
+        setCredentials({...credentials, [name]: value});
     }
 
     // Gestion du submit

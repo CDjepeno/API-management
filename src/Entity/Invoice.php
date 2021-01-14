@@ -20,7 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      },
  *      itemOperations={
  *          "delete",
- *          "get"
+ *          "get", 
+ *          "put"
  *      },
  *      subresourceOperations={
  *          "api_customers_invoices_get_subresource"={

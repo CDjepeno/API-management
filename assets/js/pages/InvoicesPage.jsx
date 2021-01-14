@@ -27,7 +27,6 @@ const InvoicePage = (props) => {
     const fetchInvoices = async () => {
         try {
             const data = await InvoicesAPI.findAll()
-            console.log(data);
             setInvoices(data);
         } catch (error) {
             console.log(error.message)

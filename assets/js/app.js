@@ -1,4 +1,5 @@
-// import de react
+// import du scss
+import '../styles/app.scss';
 import React, { useContext, useState } from 'react';
 import ReactDOM from "react-dom";
 import Navbar from './components/Navbar';
@@ -10,11 +11,9 @@ import LoginPage from './pages/LoginPage';
 import authAPI from './services/authAPI';
 import authContext from './context/authContext';
 import PrivateRoute from './components/PrivateRoute';
-
-// import du scss
-import '../styles/app.scss';
 import CustomerAdd from './pages/CustomerAdd';
 import InvoiceAdd from './pages/InvoiceAdd';
+import RegisterPage from './pages/RegisterPage';
 // import CustomerPageWithPagination from './pages/CustomerPageWithPagination';
 
 
@@ -37,6 +36,7 @@ const App = () => {
                 <main className="container pt-5">
                     <Switch>
                         <Route path="/login" component={LoginPage}/>
+                        <Route path="/register" component={RegisterPage}/>
                         <PrivateRoute path="/invoices/:id" component={InvoiceAdd}/>
                         <PrivateRoute path="/customers/:id" component={CustomerAdd}/>
                         <PrivateRoute path="/invoices" component={InvoicePage}/>

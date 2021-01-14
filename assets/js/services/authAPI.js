@@ -11,6 +11,14 @@ function logout() {
 }
 
 /**
+ * Inscription 
+ */
+function register(user) {
+    return axios
+        .post("https://127.0.0.1:8000/api/users", user)
+}
+
+/**
  * Requête HTTP d'authentification et stockage du token dans le storage sur Axios
  * @param {object} credentials 
  */
@@ -69,5 +77,6 @@ export default {
     authenticate, 
     logout, 
     setup,
-    isAuthenticated
+    isAuthenticated, 
+    register
 }
