@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Field from '../components/forms/Field';
 import CustomersAPI from "../Services/customersAPI";
 
@@ -59,7 +60,6 @@ const CustomerAdd = ({history, match}) => {
             }else {
                 await CustomersAPI.addCustomer(customer)
                 toast.success("Le client as bien été crée");
-
                 history.replace("/customers")
             }
           setErrors({})
@@ -71,8 +71,10 @@ const CustomerAdd = ({history, match}) => {
                    apiErrors[propertyPath] = message;
                })
                setErrors(apiErrors);
-               toast.error("Des erreurs dans votre formulaire");           }
-        }
+               toast.error("Des erreurs dans votre formulaire");          
+            }
+        }   
+       
     }
 
     return ( 

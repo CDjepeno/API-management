@@ -30,6 +30,7 @@ const App = () => {
     }
 
     return(
+    <>
         <authContext.Provider value={contextValue}> 
             <HashRouter>
                 <NavbarWithRouter />
@@ -49,8 +50,9 @@ const App = () => {
             <ToastContainer />
 
         </authContext.Provider>
+    </>
     );
-};
+}
 
 ReactDOM.render(<App />, document.getElementById("app"));
 

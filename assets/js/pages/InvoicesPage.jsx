@@ -3,6 +3,7 @@ import Pagination from '../components/Pagination';
 import InvoicesAPI from '../services/invoicesAPI';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const STATUS_CLASSES = {
     PAID: "success",
@@ -101,7 +102,7 @@ const InvoicePage = (props) => {
                     <tr key={invoice.id}>
                         <td>{invoice.chrono}</td>
                         <td>
-                        <Link to={"/customers/" + invoive.customer.id}>{invoice.customer.lastName} {invoice.customer.firstName}</Link> 
+                        <Link to={"/customers/" + invoice.customer.id}>{invoice.customer.lastName} {invoice.customer.firstName}</Link> 
                         </td>
                         <td>{formatDate(invoice.sentAt)}</td>
                         <td className="text-center">
