@@ -29,7 +29,7 @@ const InvoicePage = (props) => {
             const data = await InvoicesAPI.findAll()
             setInvoices(data);
         } catch (error) {
-            console.log(error.message)
+            toast.error("Error lors du chargement des factures");
         }
     } 
     
@@ -51,7 +51,9 @@ const InvoicePage = (props) => {
         
         try {
             await InvoicesAPI.delete(id)
+            toast.success("La facture as bien été supprimée");
         } catch(error) {
+            toast.error("Une erreur est survenue");
             setInvoices(originalCustomers);
         }
     };
@@ -99,7 +101,7 @@ const InvoicePage = (props) => {
                     <tr key={invoice.id}>
                         <td>{invoice.chrono}</td>
                         <td>
-                        <a href="#">{invoice.customer.lastName} {invoice.customer.firstName}</a> 
+                        <Link to={"/customers/" + invoive.customer.id}>{invoice.customer.lastName} {invoice.customer.firstName}</Link> 
                         </td>
                         <td>{formatDate(invoice.sentAt)}</td>
                         <td className="text-center">

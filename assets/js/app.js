@@ -1,6 +1,5 @@
 // import du scss
-import '../styles/app.scss';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from "react-dom";
 import Navbar from './components/Navbar';
 import { HashRouter, Switch, Route, withRouter } from "react-router-dom";
@@ -14,6 +13,8 @@ import PrivateRoute from './components/PrivateRoute';
 import CustomerAdd from './pages/CustomerAdd';
 import InvoiceAdd from './pages/InvoiceAdd';
 import RegisterPage from './pages/RegisterPage';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import CustomerPageWithPagination from './pages/CustomerPageWithPagination';
 
 
@@ -44,7 +45,9 @@ const App = () => {
                         <Route path="/" component={HomePage} />
                     </Switch>
                 </main>
-            </HashRouter>;
+            </HashRouter>
+            <ToastContainer />
+
         </authContext.Provider>
     );
 };

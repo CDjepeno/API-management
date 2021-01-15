@@ -28,11 +28,8 @@ const CustomerAdd = ({history, match}) => {
         try {
             const { firstName, lastName, email, company} = await  CustomersAPI.findById(id);
             setCustomer({ firstName, lastName, email, company});
-
         } catch (error) {
-           
-            // notif flash
-            history.replace("/customers")
+            toast.error("Impossible de récupérer le client");           
         }
     }
     
@@ -55,16 +52,15 @@ const CustomerAdd = ({history, match}) => {
         e.preventDefault();
 
         try {
+            setErrors({});
             if(editing) {
                 await CustomersAPI.putCustomer(id, customer)
-
-                // flash de notification de success
+                toast.success("Le client as bien été modifier");
             }else {
                 await CustomersAPI.addCustomer(customer)
+                toast.success("Le client as bien été crée");
 
                 history.replace("/customers")
-
-                // flash de notification de success.
             }
           setErrors({})
         } catch({ response }) {
@@ -75,9 +71,7 @@ const CustomerAdd = ({history, match}) => {
                    apiErrors[propertyPath] = message;
                })
                setErrors(apiErrors);
-
-            //  flash notification erreurs
-           }
+               toast.error("Des erreurs dans votre formulaire");           }
         }
     }
 

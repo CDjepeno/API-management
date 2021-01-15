@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import authAPI from '../services/authAPI';
 import authContext from '../context/authContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = ({ history }) => {
 
@@ -10,6 +12,7 @@ const Navbar = ({ history }) => {
     const handleLogout = () => {
       authAPI.logout();
       setIsAuthenticated(false);
+      toast.info("Vous êtes désormais déconnecté 😅", {position: toast.POSITION.BOTTOM_CENTER.LEFT});
       history.push("/login");
     }
     return ( <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,16 +28,6 @@ const Navbar = ({ history }) => {
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/invoices">Factures</NavLink>
-        </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div className="dropdown-menu">
-            <a className="dropdown-item" href="#">Action</a>
-            <a className="dropdown-item" href="#">Another action</a>
-            <a className="dropdown-item" href="#">Something else here</a>
-            <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="#">Separated link</a>
-          </div>
         </li>
       </ul>
         <ul className="navbar-nav ml-auto">

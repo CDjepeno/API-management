@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Field from '../components/forms/Field';
 import Select from '../components/forms/Select';
 import customersAPI from '../Services/customersAPI';
@@ -40,8 +40,8 @@ const InvoiceAdd = ({ history, match }) => {
             if(!invoice.customer) setInvoice({ ...invoice, customer: customers[0].id })
                         
         } catch(error) {
-            history.replace("/customers")
-            console.log(error.response)
+            toast.erro("Impossible de charger les clients");
+            history.replace("/invoices")
         }
     }
 
@@ -52,7 +52,7 @@ const InvoiceAdd = ({ history, match }) => {
             setInvoice({ amount, status, customer: customer.id });   
         } catch (error) {
             console.log(error.response)
-            // notif flash
+            toast.error("Une erreure est survenue lors de la récupération de la facture");
             history.replace("/invoices")
         }
     }
@@ -79,12 +79,12 @@ const InvoiceAdd = ({ history, match }) => {
         try {     
             if(editing) {
                 await invoicesAPI.putInvoice(id, invoice)
-                // flash notification success
+                toast.success("La facture a  bien été modifier");
                 history.replace("/invoices")
             } else {
                 await invoicesAPI.addInvoice(invoice,customer)
                 history.replace("/invoices")
-                // flash notification success
+                toast.success("La facture a bien été ajouter");
                 setErrors({})
 
             }
@@ -97,8 +97,7 @@ const InvoiceAdd = ({ history, match }) => {
                     apiErrors[propertyPath] = message;
                 })
                 setErrors(apiErrors); 
-                //  flash notification erreurs
-            }
+                toast.error("Des erreurs dans votre formulaire");            }
         }
         
     

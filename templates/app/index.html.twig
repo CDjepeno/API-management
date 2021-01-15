@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -11,5 +12,6 @@
 {% endblock %}
 
 {% block javascripts %}
+<script src="{{ asset('build/app.js') }}"></script>
 {{ encore_entry_script_tags('app') }}
 {% endblock %}

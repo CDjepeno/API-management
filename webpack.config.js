@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('css', './assets/styles/app.scss')
     .copyFiles({
         from: './assets/img',
         // optional target path, relative to the output dir
@@ -40,6 +41,7 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+    // .disabledSingleRuntimeChunk()
 
     /*
      * FEATURE CONFIG

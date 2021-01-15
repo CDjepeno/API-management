@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Field from '../components/forms/Field';
 import authAPI from '../services/authAPI';
 
@@ -36,12 +37,14 @@ const RegisterPage = ({history}) => {
         if(user.password !== user.passwordConfirm){
             apiErrors.passwordConfirm = "Votre confirmation de mot de passe n'est pas conforme avec le mot de passe"
             setErrors(apiErrors)
+            toast.error("des erreurs dans votre formulaire");
             return;
         }
 
         try {
              await authAPI.register(user)
              setErrors({})
+             toast.success("Vous êtes désormais inscrit, vous pouvez vous connecter");
              history.replaceState('/login')
         } catch({ response }) {
             const {violations} = response.data;
@@ -51,8 +54,7 @@ const RegisterPage = ({history}) => {
                    apiErrors[propertyPath] = message;
                })
                setErrors(apiErrors);
-
-            //  flash notification erreurs
+               toast.error("des erreurs dans votre formulaire");
            }
         }
     } 

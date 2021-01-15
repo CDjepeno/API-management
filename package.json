@@ -19,11 +19,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "jwt-decode": "^3.1.2",
         "moment": "^2.29.1",
         "react": "^16.8.6",
+        "react-content-loader": "^6.0.0",
         "react-dom": "^16.8.6",
-        "react-router-dom": "^5.0.0"
+        "react-router-dom": "^5.2.0",
+        "react-toastify": "^4.5.2"
     }
 }
