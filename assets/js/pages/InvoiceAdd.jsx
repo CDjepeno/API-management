@@ -97,7 +97,8 @@ const InvoiceAdd = ({ history, match }) => {
                     apiErrors[propertyPath] = message;
                 })
                 setErrors(apiErrors); 
-                toast.error("Des erreurs dans votre formulaire");            }
+                toast.error("Des erreurs dans votre formulaire");           
+            }
         }
         
     

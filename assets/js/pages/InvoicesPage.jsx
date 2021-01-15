@@ -86,7 +86,7 @@ const InvoicePage = (props) => {
             <input type="text" onChange={handleSearch} className="form-control" value={search} placeholder="Rechercher..."/>
         </div>
 
-        <table className="table table-hover">
+        <table className="table table-hover bg-primary">
             <thead>
                 <tr>
                     <th>Numéro</th>
