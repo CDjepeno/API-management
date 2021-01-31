@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
     const LoginPage = ({ history }) => {
 
-        const [error, setError]              = useState("");
+        const [error, setError]             = useState("");
         const [credentials, setCredentials] = useState({
             username: "",
             password:""
@@ -34,7 +34,7 @@ import 'react-toastify/dist/ReactToastify.css';
             toast.success("Vous êtes désormais connecter");
             history.replace("/customers");
         } catch (error) {
-            setError("Aucun compte ne possède cette addresse ou alors les informations ne correspondent pas")
+            setError("Aucun compte ne possède cette adresse ou alors les informations ne correspondent pas")
             toast.error("Une erreur est survenue");
         }
     }

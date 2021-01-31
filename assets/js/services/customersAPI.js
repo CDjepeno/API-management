@@ -4,7 +4,6 @@ import { CUSTOMERS_API } from "../config"
 
 
 async function findAll() {
-    console.log(CUSTOMERS_API)
     const cachedCustomers = await Cache.get("customers")
 
     if (cachedCustomers) return cachedCustomers;

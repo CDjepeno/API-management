@@ -13,7 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CustomerAdd from './pages/CustomerAdd';
 import InvoiceAdd from './pages/InvoiceAdd';
 import RegisterPage from './pages/RegisterPage';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import '../styles/app.scss';
 // import CustomerPageWithPagination from './pages/CustomerPageWithPagination';
@@ -35,7 +35,6 @@ const App = () => {
         <authContext.Provider value={contextValue}> 
             <HashRouter>
                 <NavbarWithRouter />
-
                 <main className="container pt-5">
                     <Switch>
                         <Route path="/login" component={LoginPage}/>

@@ -1,4 +1,3 @@
-"Use Strict"
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { LOGIN_API, USERS_API } from '../config';
@@ -28,11 +27,11 @@ function authenticate(credentials) {
         .post(LOGIN_API, credentials)
         .then(response => response.data.token)
         .then(token => {
-        // Ont stock le token dans le local storage
-        window.localStorage.setItem("authToken", token);
-        // Ont préviens axios qu'ont a un header pour toute nos futur requêtes HTTP
-        setAxiosToken(token);
-    })
+            // Ont stock le token dans le local storage
+            window.localStorage.setItem("authToken", token);
+            // Ont préviens axios qu'ont a un header pour toute nos futur requêtes HTTP
+            setAxiosToken(token);
+        })
 }
 
 /**
