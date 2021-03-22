@@ -1,3 +1,11 @@
+<p align="center"><h1 align="center">
+  Bill_management
+</h1>
+
+<p align="center">
+  Création d'une API qui s'occupe de la gestion de facture pour les petites entreprises.
+</p>
+
 ![143937](https://user-images.githubusercontent.com/43074465/98483568-c0d27480-2209-11eb-83f1-a5e27b48f732.png)
 ![logo_javascript](https://user-images.githubusercontent.com/43074465/98482792-fecc9a00-2203-11eb-8461-ceb47c8a20a8.png)
 ![react-200](https://user-images.githubusercontent.com/43074465/105323367-57d48900-5bca-11eb-8cc8-66723fa2e6d6.png)
@@ -7,7 +15,8 @@
 ![api_platform](https://user-images.githubusercontent.com/43074465/103160581-63a17b00-47d7-11eb-9cca-f83688eb9740.png)
 # API-management
 
-# Symfony
+## Features
+Symfony
 - Création d'une API avec APIplatform.
 - Système d'authentification JWT.
 - Gestion des autorisations suivant le rôle.
@@ -15,8 +24,25 @@
 - Utilisation du filtre pour les ressources.
 - Validation des données.
 
-# React
+React
 - Système de routage.
 - Authentification JWT
 - Gestion de formulaire
 - Utilisation de la librairie axios
+
+## Getting Started
+```bash
+$ git clone https://github.com/CDjepeno/API_management-React-Symfony.git
+```
+```bash
+$ cd API-management-React-Symfony
+```
+```bash
+$ composer install
+$ npm install
+```
+```bash
+$ Symfony server-start -d
+or
+$ php -S localhost:8000 -t public
+```
